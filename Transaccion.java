@@ -9,7 +9,6 @@ public class Transaccion {
     protected Empleado empleado;
     protected Cuenta cuenta;
     protected Cliente cliente;
-    protected AutoServicio canal;
 
     public Transaccion() {
         this.fechaHora = LocalDateTime.now();
@@ -17,7 +16,7 @@ public class Transaccion {
 
     public Transaccion(String id, LocalDateTime fechaHora, float monto,
                        boolean atendidoPorEmpleado, Empleado empleado,
-                       Cuenta cuenta, Cliente cliente, AutoServicio canal) {
+                       Cuenta cuenta, Cliente cliente) {
 
         this.id = id;
         this.fechaHora = fechaHora;
@@ -26,7 +25,6 @@ public class Transaccion {
         this.empleado = empleado;
         this.cuenta = cuenta;
         this.cliente = cliente;
-        this.canal = canal;
     }
 
     public String getId() { return id; }
@@ -36,7 +34,6 @@ public class Transaccion {
     public Empleado getEmpleado() { return empleado; }
     public Cuenta getCuenta() { return cuenta; }
     public Cliente getCliente() { return cliente; }
-    public AutoServicio getCanal() { return canal; }
 
     public String getResumen() {
         return "ID: " + id +

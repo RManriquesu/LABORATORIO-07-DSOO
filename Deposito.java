@@ -9,8 +9,7 @@ public class Deposito extends Transaccion {
                 true,
                 empleado,
                 cuenta,
-                cliente,
-                null);
+                cliente);
     }
 
     @Override
