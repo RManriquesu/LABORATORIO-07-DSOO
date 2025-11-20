@@ -5,7 +5,7 @@ public class Main {
         Banco banco = new Banco();
 
         // ===== CLIENTE DE EJEMPLO =====
-        Cliente cli = new Cliente("70663191", "Ronald W. Manrique", "Av. Venezuela 212", "912345678", "brayan@gmail.com", "CLI01");
+        Cliente cli = new Cliente("70663191", "Ronald W. Manrique", "Av. Venezuela 212", "912345678", "ronaldms376@gmail.com", "CLI01");
         banco.clientes.add(cli);
         Usuario uCli = new UsuarioCliente("cliente01", "1234", cli);
         banco.agregarUsuario(uCli);
