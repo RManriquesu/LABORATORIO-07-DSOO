@@ -8,6 +8,7 @@ public class Atencion {
     private Empleado empleado;
     private String motivo;
     private String notas = "";
+    private boolean atendido;
 
     public Atencion(Cliente cliente, String motivo, Empleado empleado) {
         this.id = "A-" + System.currentTimeMillis();
@@ -15,6 +16,7 @@ public class Atencion {
         this.cliente = cliente;
         this.motivo = motivo;
         this.empleado = empleado;
+        this.atendido = false;
     }
 
     public String getId() { return id; }
@@ -23,6 +25,14 @@ public class Atencion {
     public Empleado getEmpleado() { return empleado; }
     public String getMotivo() { return motivo; }
     public String getNotas() { return notas; }
+
+    public boolean isAtendido() {
+    return atendido;
+}
+
+    public void setAtendido(boolean atendido) {
+        this.atendido = atendido;
+    }
 
     public void agregarNota(String nota) {
         notas += nota + "\n";
