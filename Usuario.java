@@ -2,19 +2,21 @@ public class Usuario {
 
     protected String nombreUsuario;
     protected String contraseña;
-    protected boolean estado;  
+    protected boolean estado;  // true = activo, false = inactivo
 
     public Usuario(String nombreUsuario, String contraseña) {
         this.nombreUsuario = nombreUsuario;
         this.contraseña = contraseña;
-        this.estado = false; 
+        this.estado = true; // por defecto activo
     }
 
     public boolean login(String usuarioIngresado, String contraseñaIngresada) {
-        if (this.nombreUsuario.equals(usuarioIngresado) &&
-            this.contraseña.equals(contraseñaIngresada)) {
+        if (!estado) {
+            System.out.println("Usuario inactivo.");
+            return false;
+        }
 
-            estado = true;
+        if (this.nombreUsuario.equals(usuarioIngresado) && this.contraseña.equals(contraseñaIngresada)) {
             System.out.println("Inicio de sesión correcto para: " + nombreUsuario);
             return true;
         } else {
@@ -38,5 +40,13 @@ public class Usuario {
 
     public boolean isActivo() {
         return estado;
+    }
+
+    public void setActivo(boolean activo) {
+        this.estado = activo;
+    }
+
+    public void setContraseña(String nuevaContraseña) {
+        this.contraseña = nuevaContraseña;
     }
 }
