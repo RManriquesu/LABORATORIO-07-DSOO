@@ -11,12 +11,31 @@ public class Atencion {
     private boolean atendido;
 
     public Atencion(Cliente cliente, String motivo, Empleado empleado) {
-        this.id = "A-" + System.currentTimeMillis();
+
+        if (cliente == null) {
+            throw new IllegalArgumentException("La atención debe tener un cliente.");
+        }
+
+        if (empleado == null) {
+            throw new IllegalArgumentException("La atención debe asignarse a un empleado.");
+        }
+
+        // Usando tu método correcto
+        if (Validaciones.esTextoVacio(motivo) || motivo.length() < 3) {
+            throw new IllegalArgumentException("El motivo debe contener al menos 3 caracteres.");
+        }
+
+        this.id = generarId();
         this.fechaHora = LocalDateTime.now();
         this.cliente = cliente;
-        this.motivo = motivo;
         this.empleado = empleado;
+        this.motivo = motivo.trim();
         this.atendido = false;
+    }
+
+    private String generarId() {
+        int num = (int) (Math.random() * 9000 + 1000);
+        return "AT-" + num;
     }
 
     public String getId() { return id; }
@@ -28,13 +47,20 @@ public class Atencion {
 
     public boolean isAtendido() {
     return atendido;
-}
+    }
 
     public void setAtendido(boolean atendido) {
         this.atendido = atendido;
     }
 
     public void agregarNota(String nota) {
-        notas += nota + "\n";
+        if (Validaciones.esTextoVacio(nota)) {
+            throw new IllegalArgumentException("La nota no puede estar vacía.");
+        }
+        if (nota.length() > 200) {
+            throw new IllegalArgumentException("La nota no puede exceder los 200 caracteres.");
+        }
+
+    notas += nota.trim() + "\n";
     }
 }

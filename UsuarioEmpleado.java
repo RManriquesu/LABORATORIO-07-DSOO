@@ -3,7 +3,12 @@ public class UsuarioEmpleado extends Usuario {
 
     public UsuarioEmpleado(String nombreUsuario, String contraseña, Empleado empleado) {
         super(nombreUsuario, contraseña);
-        this.empleado = empleado;  // se asigna correctamente
+
+        if (empleado == null) {
+            throw new IllegalArgumentException("El usuario empleado debe estar asociado a un empleado real.");
+        }
+
+        this.empleado = empleado;
     }
 
     public Empleado getEmpleado() {

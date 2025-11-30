@@ -23,11 +23,27 @@ public class Persona {
     public String getTelefono() { return telefono; }
     public String getEmail() { return email; }
 
-    public void setNombre(String nombre) { this.nombre = nombre; }
-    public void setDireccion(String direccion) { this.direccion = direccion; }
+    public void setNombre(String nombre) {
+        while (true) {
+            if (Validaciones.validarSoloLetras(nombre)) {
+                this.nombre = nombre;
+                return;
+            }
+            System.out.println("Nombre inválido. Solo letras.\nIntente nuevamente:");
+            nombre = sc.nextLine();
+        }
+    }
+    
+    public void setDireccion(String direccion) {
+        if (Validaciones.esTextoVacio(direccion)) {
+            throw new IllegalArgumentException("La dirección no puede estar vacía.");
+        }
+        this.direccion = direccion;
+    }
+
     public void setTelefono(String telefono) {
         while (true) {
-            if (telefono.matches("\\d{9}")) {
+            if (Validaciones.validarTelefono(telefono)) {
                 this.telefono = telefono;
                 return;
             }
@@ -35,10 +51,21 @@ public class Persona {
             telefono = sc.nextLine();
         }
     }
-    public void setEmail(String email) { this.email = email; }
+
+    public void setEmail(String email) {
+        while (true) {
+            if (Validaciones.validarCorreo(email)) {
+                this.email = email;
+                return;
+            }
+            System.out.println("Correo inválido.\nIntente nuevamente:");
+            email = sc.nextLine();
+        }
+    }
+
     public void setDni(String dni) {
         while (true) {
-            if (dni.matches("\\d{8}")) {
+            if (Validaciones.validarDNI(dni)) {
                 this.dni = dni;
                 return;
             }
@@ -48,3 +75,4 @@ public class Persona {
     }
 
 }
+

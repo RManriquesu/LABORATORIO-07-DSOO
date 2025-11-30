@@ -12,30 +12,49 @@ public class Titularidad {
         this.tipoTitular = "";
     }
 
+    // ======================================
+    // MÉTODO PRINCIPAL
+    // ======================================
+
     public void asignarTitular(Cliente cliente, Cuenta cuenta) {
 
+        // ===== VALIDACIONES =====
+        if (cliente == null) {
+            throw new IllegalArgumentException("El cliente no puede ser nulo.");
+        }
+
+        if (cuenta == null) {
+            throw new IllegalArgumentException("La cuenta no puede ser nula.");
+        }
+
+        if (cuenta.getTitulares().contains(cliente)) {
+            System.out.println("⚠ El cliente ya es titular de esta cuenta.");
+            return;
+        }
+
+        // ===== ASIGNACIÓN DEL TIPO =====
         if (cuenta.getTitulares().isEmpty()) {
             tipoTitular = "Principal";
         } else {
             tipoTitular = "Secundario";
         }
 
+        // ===== LÓGICA DE TITULARIDAD =====
         cuenta.getTitulares().add(cliente);
         cliente.agregarCuenta(cuenta);
 
         System.out.println("Titular asignado (" + tipoTitular + "): "
-                + cliente.getNombre() + " Cuenta " + cuenta.getNumero());
+                + cliente.getNombre() + " a la Cuenta " + cuenta.getNumero());
     }
 
     public List<Cliente> obtenerTitulares(Cuenta cuenta) {
+        if (cuenta == null) {
+            throw new IllegalArgumentException("Cuenta nula.");
+        }
         return new ArrayList<>(cuenta.getTitulares());
     }
 
-    public Date getFechaInicio() {
-        return fechaInicio;
-    }
+    public Date getFechaInicio() { return fechaInicio; }
 
-    public String getTipoTitular() {
-        return tipoTitular;
-    }
+    public String getTipoTitular() { return tipoTitular; }
 }

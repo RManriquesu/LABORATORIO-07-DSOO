@@ -3,6 +3,11 @@ public class UsuarioCliente extends Usuario {
 
     public UsuarioCliente(String nombreUsuario, String contraseña, Cliente cliente) {
         super(nombreUsuario, contraseña);
+
+        if (cliente == null) {
+            throw new IllegalArgumentException("El usuario cliente debe estar asociado a un cliente real.");
+        }
+
         this.cliente = cliente;
     }
 

@@ -14,18 +14,34 @@ public class Transaccion {
         this.fechaHora = LocalDateTime.now();
     }
 
-    public Transaccion(String id, LocalDateTime fechaHora, float monto,
-                       boolean atendidoPorEmpleado, Empleado empleado,
-                       Cuenta cuenta, Cliente cliente) {
+    public Transaccion(String id, float monto, Cuenta cuenta, Cliente cliente, Empleado empleado) {
+
+        if (!Validaciones.validarConRegex(id, "^TRX-\\d{4}$")) {
+        throw new IllegalArgumentException("ID de transacción inválido. Formato requerido: TRX-XXXX");
+        }
+
+        if (!Validaciones.validarMonto(monto)) {
+            throw new IllegalArgumentException("Monto inválido. Debe ser mayor a 0.");
+        }
+
+        if (cuenta == null) {
+            throw new IllegalArgumentException("La transacción debe estar asociada a una cuenta.");
+        }
+
+        if (cliente == null) {
+            throw new IllegalArgumentException("La transacción debe tener un cliente.");
+        }
 
         this.id = id;
-        this.fechaHora = fechaHora;
         this.monto = monto;
-        this.atendidoPorEmpleado = atendidoPorEmpleado;
-        this.empleado = empleado;
         this.cuenta = cuenta;
         this.cliente = cliente;
+        this.empleado = empleado;
+        this.atendidoPorEmpleado = (empleado != null);
+        this.fechaHora = LocalDateTime.now();
     }
+
+    //Getters
 
     public String getId() { return id; }
     public LocalDateTime getFechaHora() { return fechaHora; }
@@ -48,3 +64,4 @@ public class Transaccion {
         System.out.println("Procesando transacción...");
     }
 }
+
